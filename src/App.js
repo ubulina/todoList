@@ -11,11 +11,18 @@ function App() {
 
   }
 
-  const addTodo = (event) =>{
+  const addTodo = (event) => {
 
     event.preventDefault();
 
     setTodos([...todos, todo]);
+  }
+
+  const delTodo = (event) => {
+
+    const index = parseInt(event.target.id);
+    
+    setTodos(todos.filter((todo, i) => i !== index));
   }
   
 
@@ -39,6 +46,7 @@ function App() {
         <tr key={index}>
         <td>{todo.date}</td>
         <td>{todo.desc}</td>
+        <td><button id={index} onClick={delTodo}>Delete</button></td>
         </tr>)
 
       }

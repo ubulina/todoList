@@ -3,11 +3,11 @@ import './App.css';
 
 function App() {
 
-  const [desc, setDesc] = useState ("");
+  const [todo, setTodo] = useState ({desc: '', date: ''});
   const [todos, setTodos] = useState([]);
 
   const inputChanged = (event) => {
-    setDesc(event.target.value);
+    setTodo({...todo, [event.target.name]: event.target.value});
 
   }
 
@@ -15,7 +15,7 @@ function App() {
 
     event.preventDefault();
 
-    setTodos([...todos, desc]);
+    setTodos([...todos, todo]);
   }
   
 
@@ -24,17 +24,21 @@ function App() {
 
     <form onSubmit={addTodo}>
 
-    <input type= "text" onChange={inputChanged} value={desc}/>
+    Description: <input type="text" name="desc" value= {todo.desc} onChange={inputChanged}/>
+    Date: <input type="text" name="date" value={todo.date} onChange={inputChanged}/>
     <input type= "submit" value="Add"/>
 
     </form>
     <table>
       <tbody>
 
+      <tr><th>Date</th><th>Description</th></tr>
+
       {
         todos.map((todo, index) => 
         <tr key={index}>
-        <td>{todo}</td>
+        <td>{todo.date}</td>
+        <td>{todo.desc}</td>
         </tr>)
 
       }
